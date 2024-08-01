@@ -2,7 +2,7 @@ import streamlit as st
 
 def main():
     st.set_page_config(
-        page_title="Emulet Login",
+        page_title="Octavian Login",
         page_icon="🚀",
         layout="centered",
         initial_sidebar_state="collapsed"

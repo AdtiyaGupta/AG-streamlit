@@ -13,7 +13,7 @@ def main():
     col1, col2, col3 = st.columns([0.1, 0.8, 0.1])
 
     with col2:
-        #st.image("astronaut.png", width=200)
+        st.image("astronaut.png", width=200)
 
         username = st.text_input("Username")
         password = st.text_input("Password", type="password")
@@ -28,7 +28,7 @@ def main():
 
     with col5:
         st.caption("Powered by preprod/corp")
-        #st.image("static_logo.png", width=50)
+        st.image("static_logo.png", width=50)
 
 if __name__ == "__main__":
     main()

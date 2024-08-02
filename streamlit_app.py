@@ -12,7 +12,9 @@ def display_tab_content(selected_tab):
     if selected_tab == "Introduction":
         st.header("Introduction")
         st.write("This is the introduction tab. Provide relevant information here.")
-       
+    elif selected_tab == "Data Ingestion":
+        st.header("Data Ingestion")
+        st.write("This is the data ingestion tab.")
         st.header("Path of File")
         def upload_file():
           """
@@ -30,9 +32,6 @@ def display_tab_content(selected_tab):
         
         # Call the function to create the file upload button and handle the file
         upload_file()
-    elif selected_tab == "Data Ingestion":
-        st.header("Data Ingestion")
-        st.write("This is the data ingestion tab. Describe the process here.")
     elif selected_tab == "Data Transform":
         st.header("Data Transform")
         st.write("This is the data transformation tab. Explain the steps involved.")

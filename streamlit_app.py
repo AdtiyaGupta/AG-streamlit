@@ -8,18 +8,7 @@ def main():
         initial_sidebar_state="collapsed"
     )
     
-    background_image = st.image("https://wpamelia.com/wp-content/uploads/2019/02/background-black-colors-952670.jpg")
-
-    # Custom CSS to position the image as background
-    st.markdown(
-        <style>
-            body {
-                background-image: url('https://wpamelia.com/wp-content/uploads/2019/02/background-black-colors-952670.jpg');
-                background-size: cover;
-                background-repeat: no-repeat;
-            }
-        </style>
-        , unsafe_allow_html=True)
+    
         
     st.title("Emulet Login")
 
@@ -42,6 +31,20 @@ def main():
     with col5:
         st.caption("Powered by preprod/corp")
         st.image("static_logo.png", width=300)
+
+    
+    background_image = st.image("https://wpamelia.com/wp-content/uploads/2019/02/background-black-colors-952670.jpg")
+
+    # Custom CSS to position the image as background
+    st.markdown(
+        <style>
+            body {
+                background-image: url('https://wpamelia.com/wp-content/uploads/2019/02/background-black-colors-952670.jpg');
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+        </style>
+        , unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()

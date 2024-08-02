@@ -75,11 +75,7 @@ if selected_tab[1]:
         # Apply sort transformation
             return self.data.sort_values(by=sort_column)
 
-# Example usage:
-    data = pd.read_csv('data.csv')
-    transformation = DataTransformation(data)
-    transformed_data = transformation.aggregate('sum')
-    print(transformed_data)
+
 
 # Auto Train ML models tab
 if selected_tab[2]:

@@ -37,6 +37,7 @@ def main():
     container.markdown(
         
         <style>
+        '''
         .full-viewport {
             position: fixed;
             z-index: -1;
@@ -48,10 +49,9 @@ def main():
             background-size: cover;
             background-repeat: no-repeat;
         }
-        </style>
+        </style>'''
         ,
-        unsafe_allow_html=False,  # Safe way to inject CSS
-    )
+        unsafe_allow_html=False,  # Safe way to inject CSS )
     
     # Add the full-viewport class to the container
     container.add_class("full-viewport")

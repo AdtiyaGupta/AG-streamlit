@@ -8,6 +8,17 @@ def main():
         initial_sidebar_state="collapsed"
     )
 
+        page_bg_img = 
+    <style>
+    body {
+    background-image: url("https://images.unsplash.com/photo-1542281286-9e0a16bb7366");
+    background-size: cover;
+    }
+    </style>
+    
+    
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+
     st.title("Emulet Login")
 
     col1, col2, col3 = st.columns([0.1, 0.8, 0.1])

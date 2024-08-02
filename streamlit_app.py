@@ -28,7 +28,7 @@ def main():
 
     with col5:
         st.caption("Powered by preprod/corp")
-        st.image("static_logo.png", width=50)
+        st.image("static_logo.png", width=500)
 
 if __name__ == "__main__":
     main()

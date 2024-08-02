@@ -1,43 +1,48 @@
 import streamlit as st
 
-def main():
-    st.set_page_config(
-        page_title="Octavian Login",
-        page_icon="🚀",
-        layout="centered",
-        initial_sidebar_state="collapsed"
-    )
-    
-    
-    
-        
-    st.title("Emulet Login")
+# Define tab names
+tab_names = ["Tab 1", "Tab 2", "Tab 3", "Tab 4", "Tab 5"]
 
-    col1, col2, col3 = st.columns([0.1, 0.8, 0.1])
+# Create tabs
+tabs = st.tabs(tab_names)
 
-    with col2:
-        #st.image("astronaut.png", width=200)
+# Content for each tab
+with tabs[0]:
+    st.header("Tab 1 Content")
+    # Add your content here
 
-        username = st.text_input("Username")
-        password = st.text_input("Password", type="password")
+with tabs[1]:
+    st.header("Tab 2 Content")
+    # Add your content here
 
-        sign_in = st.button("Sign In")
+with tabs[2]:
+    st.header("Tab 3 Content")
+    # Add your content here
 
-        if sign_in:
-            # Add your sign-in logic here
-            st.success("Logged in successfully!")
+with tabs[3]:
+    st.header("Tab 4 Content")
+    # Add your content here
 
+with tabs[4]:
+    st.header("Tab 5 Content")
+    # Add your content here
 
-  
-
-    col4, col5, col6 = st.columns([0.1, 0.8, 0.1])
-
-    with col5:
-        st.caption("Powered by preprod/corp")
-        st.image("static_logo.png", width=300)
-
-    
-  
-
-if __name__ == "__main__":
-    main()
+# Custom CSS to style tabs (optional)
+st.markdown("""
+<style>
+.stTabs {
+  display: flex;
+  justify-content: space-around;
+}
+.stTab button {
+  background-color: #f2f2f2;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.stTab button:hover {
+  background-color: #ddd;
+}
+</style>
+""", unsafe_allow_html=True)

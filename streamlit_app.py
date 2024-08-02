@@ -1,7 +1,7 @@
 import streamlit as st
 
 def main():
-    tab_names = ["Tab 1", "Tab 2", "Tab 3", "Tab 4", "Tab 5"]
+    tab_names = ["Introduction", "Data Ingestion", "Data Transformation", "Auto Train ML Model", "Freeze the Learning"]
     selected_tab = st.session_state.get('selected_tab', tab_names[0])
 
     col1, col2, col3, col4, col5 = st.columns(5)

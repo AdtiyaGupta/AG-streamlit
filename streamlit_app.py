@@ -33,18 +33,33 @@ def main():
         st.image("static_logo.png", width=300)
 
     
-    background_image = st.image("https://wpamelia.com/wp-content/uploads/2019/02/background-black-colors-952670.jpg")
+    background_image_url = st.image("https://wpamelia.com/wp-content/uploads/2019/02/background-black-colors-952670.jpg")
 
-    # Custom CSS to position the image as background
-    st.markdown(
+     # Create a container with a full-viewport class
+    container = st.container()
+    
+    # Add CSS style to the container
+    container.markdown(
+        """
         <style>
-            <body> {
-                background-image: url('https://wpamelia.com/wp-content/uploads/2019/02/background-black-colors-952670.jpg');
-                background-size: cover;
-                background-repeat: no-repeat;
-            }
+        .full-viewport {
+            position: fixed;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-image: url('""" + background_image_url + """');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
         </style>
-        , unsafe_allow_html=True)
+        """,
+        unsafe_allow_html=False,  # Safe way to inject CSS
+    )
+    
+    # Add the full-viewport class to the container
+    container.add_class("full-viewport")
 
 if __name__ == "__main__":
     main()

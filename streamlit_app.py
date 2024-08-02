@@ -1,48 +1,39 @@
 import streamlit as st
 
-# Define tab names
-tab_names = ["Tab 1", "Tab 2", "Tab 3", "Tab 4", "Tab 5"]
+def main():
+    tab_names = ["Tab 1", "Tab 2", "Tab 3", "Tab 4", "Tab 5"]
+    selected_tab = st.session_state.get('selected_tab', tab_names[0])
 
-# Create tabs
-tabs = st.tabs(tab_names)
+    col1, col2, col3, col4, col5 = st.columns(5)
+    with col1:
+        if col1.button(tab_names[0]):
+            st.session_state['selected_tab'] = tab_names[0]
+    with col2:
+        if col2.button(tab_names[1]):
+            st.session_state['selected_tab'] = tab_names[1]
+    with col3:
+        if col3.button(tab_names[2]):
+            st.session_state['selected_tab'] = tab_names[2]
+    with col4:
+        if col4.button(tab_names[3]):
+            st.session_state['selected_tab'] = tab_names[3]
+    with col5:
+        if col5.button(tab_names[4]):
+            st.session_state['selected_tab'] = tab_names[4]
 
-# Content for each tab
-with tabs[0]:
-    st.header("Tab 1 Content")
-    # Add your content here
+    st.write(f"Selected tab: {selected_tab}")
 
-with tabs[1]:
-    st.header("Tab 2 Content")
-    # Add your content here
+    # Content based on selected tab
+    if selected_tab == tab_names[0]:
+        st.header("Tab 1 Content")
+    elif selected_tab == tab_names[1]:
+        st.header("Tab 2 Content")
+    elif selected_tab == tab_names[2]:
+        st.header("Tab 3 Content")
+    elif selected_tab == tab_names[3]:
+        st.header("Tab 4 Content")
+    elif selected_tab == tab_names[4]:
+        st.header("Tab 5 Content")
 
-with tabs[2]:
-    st.header("Tab 3 Content")
-    # Add your content here
-
-with tabs[3]:
-    st.header("Tab 4 Content")
-    # Add your content here
-
-with tabs[4]:
-    st.header("Tab 5 Content")
-    # Add your content here
-
-# Custom CSS to style tabs (optional)
-st.markdown("""
-<style>
-.stTabs {
-  display: flex;
-  justify-content: space-around;
-}
-.stTab button {
-  background-color: #f2f2f2;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-.stTab button:hover {
-  background-color: #ddd;
-}
-</style>
-""", unsafe_allow_html=True)
+if __name__ == "__main__":
+    main()

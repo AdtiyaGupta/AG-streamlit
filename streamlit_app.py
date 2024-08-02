@@ -13,7 +13,7 @@ def display_tab_content(selected_tab):
         st.header("Introduction")
         st.write("This is the introduction tab. Provide relevant information here.")
        
-        st.write("Path of File")
+        st.header("Path of File")
         def upload_file():
           """
           This function handles the upload of a file using a button and drag and drop.

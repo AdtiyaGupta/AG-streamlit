@@ -1,11 +1,8 @@
 import streamlit as st
 
 def create_tabs(tab_names):
-    cols = st.columns(len(tab_names))
-    for i, tab_name in enumerate(tab_names):
-        with cols[i]:
-            if cols[i].button(tab_name):
-                st.session_state['selected_tab'] = tab_name
+    selected_tab = st.selectbox("Select Tab", tab_names)
+    st.session_state['selected_tab'] = selected_tab
 
 def display_tab_content(selected_tab):
     if selected_tab == "Introduction":

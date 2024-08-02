@@ -24,7 +24,7 @@ if selected_tab[0]:
     st.header("Data Ingestion")
     st.write("Enter the complete path where the source data is stored.")
     path = st.text_input("Path of the file")
-        def upload_file():
+    def upload_file():
       """
       This function handles the upload of a file using a button and drag and drop.
       """

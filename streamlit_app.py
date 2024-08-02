@@ -55,31 +55,31 @@ if selected_tab[1]:
     st.header("Data Transformation")
     st.write("This is the Data Transformation tab.")
     class DataTransformation:
-    def __init__(self, data):
+        def __init__(self, data):
         self.data = data
 
-    def aggregate(self, aggregation_type):
+        def aggregate(self, aggregation_type):
         # Apply aggregation transformation
-        if aggregation_type == 'sum':
+            if aggregation_type == 'sum':
             return self.data.sum()
-        elif aggregation_type == 'mean':
+            elif aggregation_type == 'mean':
             return self.data.mean()
-        else:
+            else:
             raise ValueError('Invalid aggregation type')
 
-    def filter(self, filter_condition):
+        def filter(self, filter_condition):
         # Apply filter transformation
         return self.data[filter_condition]
 
-    def sort(self, sort_column):
+        def sort(self, sort_column):
         # Apply sort transformation
         return self.data.sort_values(by=sort_column)
 
 # Example usage:
-data = pd.read_csv('data.csv')
-transformation = DataTransformation(data)
-transformed_data = transformation.aggregate('sum')
-print(transformed_data)
+    data = pd.read_csv('data.csv')
+    transformation = DataTransformation(data)
+    transformed_data = transformation.aggregate('sum')
+    print(transformed_data)
 
 # Auto Train ML models tab
 if selected_tab[2]:

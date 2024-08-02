@@ -78,48 +78,19 @@ if selected_tab[1]:
 
 
 # Auto Train ML models tab
-if selected_tab[2]:
-    st.header("Auto Train ML models")
-    st.write("This is the Auto Train ML models tab.")
-        # Train the model
-    
-       
-
-       
-
-    # Main body of the app
-    st.markdown("---")
-    
-    # Show the selected features and target
-    st.subheader("Selected Features and Target")
-   
-    
-    # Show the chosen model
-    st.subheader("Chosen Model")
-    
-    
-    # Placeholder for visualization and other components
-    st.subheader("Model Visualization and Analysis")
-    st.markdown("This is where you will be able to visualize the model's performance and analyze its results.")
-    
-    # Placeholder for model training and evaluation
-    st.subheader("Model Training and Evaluation")
-    st.markdown("This is where you will be able to train the model and evaluate its performance.")
-    
-    # Placeholder for model deployment
-    st.subheader("Model Deployment")
-    st.markdown("This is where you will be able to deploy the trained model.")
-    
-    # Freeze the learnings tab
+    if selected_tab[2]:
+        
+        st.subheader("Model Visualization and Analysis")
+        st.markdown("This is where you will be able to visualize the model's performance and analyze its results.")
+        
+        # Placeholder for model training and evaluation
+        st.subheader("Model Training and Evaluation")
+        st.markdown("This is where you will be able to train the model and evaluate its performance.")
+        
+        # Placeholder for model deployment
+        st.subheader("Model Deployment")
+        st.markdown("This is where you will be able to deploy the trained model.")
+        
+        # Freeze the learnings tab
     if selected_tab[3]:
         st.header("Freeze the learnings")
-        
-        if st.button('Freeze'):
-            
-        
-            
-            
-            # Assuming you have a trained model object named `model`
-            # ...
-    
-  

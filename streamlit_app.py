@@ -87,7 +87,7 @@ if selected_tab[3]:
     st.header("Freeze the learnings")
     st.write("This is the Freeze the learnings tab.")
     if st.button('Freeze'):
-    st.write(f'Freezing the {model_choice} model...')
+        st.write(f'Freezing the {model_choice} model...')
 
     
     

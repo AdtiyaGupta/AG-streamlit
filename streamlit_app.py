@@ -25,15 +25,15 @@ def main():
 
     # Content based on selected tab
     if selected_tab == tab_names[0]:
-        st.header("Tab 1 Content")
+        st.header("Introduction")
     elif selected_tab == tab_names[1]:
-        st.header("Tab 2 Content")
+        st.header("Data Ingestion")
     elif selected_tab == tab_names[2]:
-        st.header("Tab 3 Content")
+        st.header("Data Transform")
     elif selected_tab == tab_names[3]:
-        st.header("Tab 4 Content")
+        st.header("Auto Train Ml Model")
     elif selected_tab == tab_names[4]:
-        st.header("Tab 5 Content")
+        st.header("Freeze the Learning")
 
 if __name__ == "__main__":
     main()

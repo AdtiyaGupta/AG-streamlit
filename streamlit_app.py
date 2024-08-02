@@ -84,9 +84,9 @@ if selected_tab[2]:
         # Train the model
     if model_type == "Linear Regression":
        
-    elif model_type == "Decision Tree":
+        elif model_type == "Decision Tree":
         
-    elif model_type == "AdaBoost":
+        elif model_type == "AdaBoost":
        
 
         # Main body of the app

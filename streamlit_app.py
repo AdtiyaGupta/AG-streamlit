@@ -9,12 +9,12 @@ def main():
     )
 
     page_bg_img = 
-    <style>
-    body {
-    background-image: url("https://unsplash.com/photos/a-close-up-of-a-cell-phone-with-a-black-background-ThymSQ6OYOw");
-    background-size: cover;
-    }
-    </style>
+        <style>
+        body {
+        background-image: url("https://unsplash.com/photos/a-close-up-of-a-cell-phone-with-a-black-background-ThymSQ6OYOw");
+        background-size: cover;
+        }
+        </style>
     
     
     st.markdown(page_bg_img, unsafe_allow_html=True)

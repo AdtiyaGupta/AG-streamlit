@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 
 def create_tabs(tab_names):
     cols = st.columns(len(tab_names))
@@ -11,24 +12,24 @@ def display_tab_content(selected_tab):
     if selected_tab == "Introduction":
         st.header("Introduction")
         st.write("This is the introduction tab. Provide relevant information here.")
-        import os
+       
 
-def upload_file():
-  """
-  This function handles the upload of a file using a button and drag and drop.
-  """
-  uploaded_file = st.file_uploader("Choose a file", type=["csv", "xlsx"], accept_multiple_files=False)
-  if uploaded_file is not None:
-    # Handle the uploaded file
-    file_path = os.path.join("uploads", uploaded_file.name)
-    with open(file_path, "wb") as f:
-      f.write(uploaded_file.read())
-    st.success("File uploaded successfully!")
-  else:
-    st.info("Please upload a file.")
-
-# Call the function to create the file upload button and handle the file
-upload_file()
+        def upload_file():
+          """
+          This function handles the upload of a file using a button and drag and drop.
+          """
+          uploaded_file = st.file_uploader("Choose a file", type=["csv", "xlsx"], accept_multiple_files=False)
+          if uploaded_file is not None:
+            # Handle the uploaded file
+            file_path = os.path.join("uploads", uploaded_file.name)
+            with open(file_path, "wb") as f:
+              f.write(uploaded_file.read())
+            st.success("File uploaded successfully!")
+          else:
+            st.info("Please upload a file.")
+        
+        # Call the function to create the file upload button and handle the file
+        upload_file()
     elif selected_tab == "Data Ingestion":
         st.header("Data Ingestion")
         st.write("This is the data ingestion tab. Describe the process here.")

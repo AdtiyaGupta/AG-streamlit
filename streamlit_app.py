@@ -1,6 +1,6 @@
 import streamlit as st
 import os
-
+import pickle
 
 # Set page config
 st.set_page_config(
@@ -86,3 +86,19 @@ if selected_tab[2]:
 if selected_tab[3]:
     st.header("Freeze the learnings")
     st.write("This is the Freeze the learnings tab.")
+    if st.button('Freeze'):
+    st.write(f'Freezing the {model_choice} model...')
+
+    
+    
+    # Assuming you have a trained model object named `model`
+    # ...
+    
+    if st.button('Freeze'):
+        # Save the model to a file
+        filename = f'{model_choice}_model.pkl'
+        pickle.dump(model, open(filename, 'wb'))
+    
+        st.success(f'The {model_choice} model has been frozen and saved to {filename}.')
+    
+    st.success(f'The {model_choice} model has been frozen.')

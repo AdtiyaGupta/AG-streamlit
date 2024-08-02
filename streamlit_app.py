@@ -11,7 +11,7 @@ def main():
         page_bg_img = 
     <style>
     body {
-    background-image: url("https://images.unsplash.com/photo-1542281286-9e0a16bb7366");
+    background-image: url("https://unsplash.com/photos/a-close-up-of-a-cell-phone-with-a-black-background-ThymSQ6OYOw");
     background-size: cover;
     }
     </style>

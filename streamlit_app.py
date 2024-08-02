@@ -8,7 +8,7 @@ def main():
         initial_sidebar_state="collapsed"
     )
 
-        page_bg_img = 
+    page_bg_img = 
     <style>
     body {
     background-image: url("https://unsplash.com/photos/a-close-up-of-a-cell-phone-with-a-black-background-ThymSQ6OYOw");

@@ -4,7 +4,7 @@ def main():
     tab_names = ["Introduction", "Data Ingestion", "Data Transformation", "Auto Train ML Model", "Freeze the Learning"]
     selected_tab = st.session_state.get('selected_tab', tab_names[0])
 
-    col1, col2, col3, col4, col5 = st.columns(7)
+    col1, col2, col3, col5, col7 = st.columns(7)
     with col1:
         if col1.button(tab_names[0]):
             st.session_state['selected_tab'] = tab_names[0]
@@ -15,10 +15,10 @@ def main():
         if col3.button(tab_names[2]):
             st.session_state['selected_tab'] = tab_names[2]
     with col4:
-        if col4.button(tab_names[3]):
+        if col5.button(tab_names[3]):
             st.session_state['selected_tab'] = tab_names[3]
     with col5:
-        if col5.button(tab_names[4]):
+        if col7.button(tab_names[4]):
             st.session_state['selected_tab'] = tab_names[4]
 
     st.write(f"Selected tab: {selected_tab}")

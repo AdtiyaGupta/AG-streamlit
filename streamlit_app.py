@@ -83,11 +83,11 @@ if selected_tab[2]:
     st.write("This is the Auto Train ML models tab.")
         # Train the model
     if model_type == "Linear Regression":
-        model = LinearRegression()
+       
     elif model_type == "Decision Tree":
-        model = DecisionTreeRegressor()
+        
     elif model_type == "AdaBoost":
-        model = AdaBoostRegressor()
+       
 
         # Main body of the app
         st.markdown("---")

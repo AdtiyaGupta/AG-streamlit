@@ -7,7 +7,8 @@ def main():
         layout="centered",
         initial_sidebar_state="collapsed"
     )
-      background_image_url = st.image("https://wpamelia.com/wp-content/uploads/2019/02/background-black-colors-952670.jpg")
+    
+    background_image_url = st.image("https://wpamelia.com/wp-content/uploads/2019/02/background-black-colors-952670.jpg")
 
      # Create a container with a full-viewport class
     container = st.container()

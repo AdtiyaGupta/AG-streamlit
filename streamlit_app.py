@@ -56,24 +56,24 @@ if selected_tab[1]:
     st.write("This is the Data Transformation tab.")
     class DataTransformation:
         def __init__(self, data):
-        self.data = data
+            self.data = data
 
         def aggregate(self, aggregation_type):
         # Apply aggregation transformation
             if aggregation_type == 'sum':
-            return self.data.sum()
+                return self.data.sum()
             elif aggregation_type == 'mean':
-            return self.data.mean()
+                return self.data.mean()
             else:
-            raise ValueError('Invalid aggregation type')
+                raise ValueError('Invalid aggregation type')
 
         def filter(self, filter_condition):
         # Apply filter transformation
-        return self.data[filter_condition]
+            return self.data[filter_condition]
 
         def sort(self, sort_column):
         # Apply sort transformation
-        return self.data.sort_values(by=sort_column)
+            return self.data.sort_values(by=sort_column)
 
 # Example usage:
     data = pd.read_csv('data.csv')

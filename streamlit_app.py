@@ -1,5 +1,5 @@
 import streamlit as st
-from PIL import Image
+#from PIL import Image
 
 # Set page config
 st.set_page_config(
@@ -9,8 +9,8 @@ st.set_page_config(
 )
 
 # Load image
-image = Image.open("preprod_emulet.png")
-st.image(image, use_column_width=True)
+#image = Image.open("preprod_emulet.png")
+#st.image(image, use_column_width=True)
 
 # Add sidebar
 st.sidebar.header("Preprod Emulet")

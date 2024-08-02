@@ -38,7 +38,7 @@ def main():
     # Custom CSS to position the image as background
     st.markdown(
         <style>
-            body {
+            <body> {
                 background-image: url('https://wpamelia.com/wp-content/uploads/2019/02/background-black-colors-952670.jpg');
                 background-size: cover;
                 background-repeat: no-repeat;

@@ -2,6 +2,7 @@ import streamlit as st
 import os
 import pickle
 import pandas as pd
+import numpy as np
 from sklearn.metrics import r2_score, mean_squared_error
 from sklearn.linear_model import LinearRegression
 
@@ -62,7 +63,7 @@ if uploaded_file:
     y = data[target_column]
 
     # Make predictions on the uploaded data
-    y_pred = model.predict(X.to_numpy())
+    y_pred = model.predict(X.to_numpy().reshape(-1, 1))
 
     # Calculate the accuracy score (R-squared)
     r2 = r2_score(y, y_pred)

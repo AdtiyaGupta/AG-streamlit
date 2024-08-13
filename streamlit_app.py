@@ -2,7 +2,8 @@ import streamlit as st
 import os
 import pickle
 import pandas as pd
-from sklearn.metrics import r2_score
+from sklearn.metrics import r2_score, mean_squared_error
+from sklearn.linear_model import LinearRegression
 
 # Set page config
 st.set_page_config(
@@ -50,16 +51,24 @@ if uploaded_file:
     with open('linear_reg_model.pkl', 'rb') as handle:
         model = pickle.load(handle)
 
-    # Make predictions on the uploaded data
+    # Split the data into features (X) and target (y)
     X = data.drop('target_column', axis=1)  # assume the target column is named 'target_column'
     y = data['target_column']
+
+    # Make predictions on the uploaded data
     y_pred = model.predict(X)
 
     # Calculate the accuracy score (R-squared)
-    accuracy = r2_score(y, y_pred)
+    r2 = r2_score(y, y_pred)
 
-    # Display the accuracy score
-    st.write(f"Accuracy score (R-squared): {accuracy:.3f}")
+    # Calculate the Mean Squared Error (MSE)
+    mse = mean_squared_error(y, y_pred)
+
+    # Display the accuracy score (R-squared)
+    st.write(f"R-squared score: {r2:.3f}")
+
+    # Display the Mean Squared Error (MSE)
+    st.write(f"Mean Squared Error (MSE): {mse:.3f}")
 
     # Display the loaded model
     st.write(model)

@@ -16,8 +16,13 @@ st.header("Data Ingestion")
 uploaded_file = st.file_uploader("Choose a file", type=["csv", "xlsx"], accept_multiple_files=False)
 
 if uploaded_file:
+    # Create the uploads directory if it doesn't exist
+    uploads_dir = "uploads"
+    if not os.path.exists(uploads_dir):
+        os.makedirs(uploads_dir)
+
     # Handle the uploaded file
-    file_path = os.path.join("uploads", uploaded_file.name)
+    file_path = os.path.join(uploads_dir, uploaded_file.name)
     with open(file_path, "wb") as f:
         f.write(uploaded_file.read())
     st.success("File uploaded successfully!")

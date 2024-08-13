@@ -44,4 +44,8 @@ if data_dimensions:
 
 st.header("Data Transformation")
 st.write("This is the Data Transformation tab.")
+with open('model.pkl', 'rb') as handle:
+    model = pickle.load(handle)
 
+# Use the loaded model
+st.write(model)

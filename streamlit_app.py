@@ -79,7 +79,3 @@ if uploaded_file:
 
     # Display the loaded model
     st.write(model)
-
-# Data Transformation tab
-st.header("Data Transformation")
-st.write("This is the Data Transformation tab.")

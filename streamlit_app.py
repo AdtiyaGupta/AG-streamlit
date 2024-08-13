@@ -62,7 +62,7 @@ if uploaded_file:
     y = data[target_column]
 
     # Make predictions on the uploaded data
-    y_pred = model.predict(X)
+    y_pred = model.predict(X.to_numpy())
 
     # Calculate the accuracy score (R-squared)
     r2 = r2_score(y, y_pred)

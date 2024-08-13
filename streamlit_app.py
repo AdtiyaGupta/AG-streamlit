@@ -41,7 +41,7 @@ if data_dimensions:
     st.write("Confirmation message")
 
 # Data Transformation tab
-if selected_tab[1]:
-    st.header("Data Transformation")
-    st.write("This is the Data Transformation tab.")
+
+st.header("Data Transformation")
+st.write("This is the Data Transformation tab.")
 

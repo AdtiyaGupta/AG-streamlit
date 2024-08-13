@@ -1,6 +1,8 @@
 import streamlit as st
 import os
 import pickle
+import pandas as pd
+from sklearn.metrics import r2_score
 
 # Set page config
 st.set_page_config(
@@ -35,17 +37,33 @@ if uploaded_file:
     st.write(f"File name: {file_name}")
     st.write(f"File path: {file_path}")
 
+    # Load the uploaded data
+    if file_name.endswith('.csv'):
+        data = pd.read_csv(file_path)
+    elif file_name.endswith('.xlsx'):
+        data = pd.read_excel(file_path)
+
     # Display the data dimensions
-    if st.button("Run"):
-        st.write("Confirmation message")
+    st.write(f"Data shape: {data.shape}")
+
+    # Load the pre-trained model
+    with open('linear_reg_model.pkl', 'rb') as handle:
+        model = pickle.load(handle)
+
+    # Make predictions on the uploaded data
+    X = data.drop('target_column', axis=1)  # assume the target column is named 'target_column'
+    y = data['target_column']
+    y_pred = model.predict(X)
+
+    # Calculate the accuracy score (R-squared)
+    accuracy = r2_score(y, y_pred)
+
+    # Display the accuracy score
+    st.write(f"Accuracy score (R-squared): {accuracy:.3f}")
+
+    # Display the loaded model
+    st.write(model)
 
 # Data Transformation tab
 st.header("Data Transformation")
 st.write("This is the Data Transformation tab.")
-
-# Load the pre-trained model
-with open('linear_reg_model (1).pkl', 'rb') as handle:
-    model = pickle.load(handle)
-
-# Display the loaded model
-st.write(model)

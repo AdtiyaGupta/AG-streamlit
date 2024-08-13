@@ -50,10 +50,16 @@ if uploaded_file:
     # Load the pre-trained model
     with open(r'linear_reg_model (1).pkl', 'rb') as handle:
         model = pickle.load(handle)
-    
+
+    # Get the column names
+    columns = data.columns.tolist()
+
+    # Create a dropdown to select the target column
+    target_column = st.selectbox("Select the target column", columns)
+
     # Split the data into features (X) and target (y)
-    X = data.drop('target_column', axis=1)  # assume the target column is named 'target_column'
-    y = data['target_column']
+    X = data.drop(target_column, axis=1)
+    y = data[target_column]
 
     # Make predictions on the uploaded data
     y_pred = model.predict(X)

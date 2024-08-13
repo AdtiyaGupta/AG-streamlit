@@ -4,20 +4,10 @@ import pickle
 
 # Set page config
 st.set_page_config(
-    page_title="Preprod Emulet",
+    page_title="ML model",
     page_icon=":rocket:",
     layout="wide",
 )
-
-
-
-# Add sidebar
-st.sidebar.header("Preprod Emulet")
-st.sidebar.write("This is a demo of a Streamlit app.")
-
-# Add tabs
-tabs = ["Data Ingestion", "Data Transformation", "Auto Train ML models", "Freeze the learnings"]
-selected_tab = st.tabs(tabs)
 
 # Data Ingestion tab
 if selected_tab[0]:

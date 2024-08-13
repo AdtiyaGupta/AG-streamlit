@@ -10,42 +10,37 @@ st.set_page_config(
 )
 
 # Data Ingestion tab
-
 st.header("Data Ingestion")
-st.write("Enter the complete path where the source data is stored.")
-path = st.text_input("Path of the file")
-def upload_file():
-  """
-  This function handles the upload of a file using a button and drag and drop.
-  """
-  uploaded_file = st.file_uploader("Choose a file", type=["csv", "xlsx"], accept_multiple_files=False)
-  if uploaded_file is not None:
+
+# Create a file uploader
+uploaded_file = st.file_uploader("Choose a file", type=["csv", "xlsx"], accept_multiple_files=False)
+
+if uploaded_file:
     # Handle the uploaded file
     file_path = os.path.join("uploads", uploaded_file.name)
     with open(file_path, "wb") as f:
-      f.write(uploaded_file.read())
+        f.write(uploaded_file.read())
     st.success("File uploaded successfully!")
-  else:
-    st.info("Please upload a file.")
 
-# Call the function to create the file upload button and handle the file
-upload_file()
+    # Get the file name and path
+    file_name = uploaded_file.name
+    file_path = file_path
 
-st.write("Enter the complete name with extension of the source data i.e..csv or .xlsx")
-name = st.text_input("Name of the file")
+    # Display the file name and path
+    st.write(f"File name: {file_name}")
+    st.write(f"File path: {file_path}")
 
-st.write("Data dimensions")
-data_dimensions = st.button("Run")
-
-if data_dimensions:
-    st.write("Confirmation message")
+    # Display the data dimensions
+    if st.button("Run"):
+        st.write("Confirmation message")
 
 # Data Transformation tab
-
 st.header("Data Transformation")
 st.write("This is the Data Transformation tab.")
+
+# Load the pre-trained model
 with open('linear_reg_model (1).pkl', 'rb') as handle:
     model = pickle.load(handle)
 
-# Use the loaded model
+# Display the loaded model
 st.write(model)

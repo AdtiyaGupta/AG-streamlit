@@ -48,7 +48,7 @@ if uploaded_file:
     st.write(f"Data shape: {data.shape}")
 
     # Load the pre-trained model
-    with open(r'linear_reg_model(1).pkl', 'rb') as handle:
+    with open('linear_reg_model (1).pkl', 'rb') as handle:
         model = pickle.load(handle)
     
     # Split the data into features (X) and target (y)

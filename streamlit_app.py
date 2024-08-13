@@ -10,7 +10,7 @@ st.set_page_config(
 )
 
 # Data Ingestion tab
-if selected_tab[0]:
+
     st.header("Data Ingestion")
     st.write("Enter the complete path where the source data is stored.")
     path = st.text_input("Path of the file")

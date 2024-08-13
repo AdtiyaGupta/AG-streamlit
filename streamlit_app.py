@@ -63,7 +63,7 @@ if uploaded_file:
     y = data[target_column]
 
     # Make predictions on the uploaded data
-    X_2d = X.to_numpy()[:, np.newaxis]  # Reshape X to 2D array
+    X_2d = X.values.reshape(-1, 1)  # Reshape X to 2D array
     y_pred = model.predict(X_2d)
 
     # Calculate the accuracy score (R-squared)

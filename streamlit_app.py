@@ -49,7 +49,7 @@ if uploaded_file:
 
     # Load the pre-trained model
     with open(r'linear_reg_model(1).pkl', 'rb') as handle:
-    model = pickle.load(handle)
+        model = pickle.load(handle)
     
     # Split the data into features (X) and target (y)
     X = data.drop('target_column', axis=1)  # assume the target column is named 'target_column'

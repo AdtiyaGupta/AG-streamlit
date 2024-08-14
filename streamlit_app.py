@@ -62,7 +62,6 @@ if uploaded_file:
     X = data.drop(target_column, axis=1)
     y = data[target_column]
 
- 
     # Make predictions on the uploaded data
     X_array = X.values  # Convert X to a NumPy array
     n_features = X_array.shape[1]
@@ -71,28 +70,14 @@ if uploaded_file:
         st.error(f"Model expects {expected_n_features} features, but got {n_features}. Please check your data and model.")
     else:
         y_pred = model.predict(X_array)
-        # Assuming that y is a pandas Series or a NumPy array
-        y = uploaded_file['target_column'].values  # Replace 'target_column' with the actual column name of your target variable
         # Calculate the accuracy score (R-squared)
-        r2 = r2_score(y, y_pred)
+        r2 = r2_score(y.values, y_pred)
         # Calculate the Mean Squared Error (MSE)
-        mse = mean_squared_error(y, y_pred)
+        mse = mean_squared_error(y.values, y_pred)
         # Display the accuracy score (R-squared)
         st.write(f"R-squared score: {r2:.3f}")
         # Display the Mean Squared Error (MSE)
         st.write(f"Mean Squared Error (MSE): {mse:.3f}")
-
-    # Calculate the accuracy score (R-squared)
-    r2 = r2_score(y, y_pred)
-
-    # Calculate the Mean Squared Error (MSE)
-    mse = mean_squared_error(y, y_pred)
-
-    # Display the accuracy score (R-squared)
-    st.write(f"R-squared score: {r2:.3f}")
-
-    # Display the Mean Squared Error (MSE)
-    st.write(f"Mean Squared Error (MSE): {mse:.3f}")
 
     # Display the loaded model
     st.write(model)

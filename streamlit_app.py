@@ -60,7 +60,11 @@ if uploaded_file:
 
     # Select the correct features
     features = ['feature1', 'feature2', 'feature3', 'feature4']  # Replace with the correct feature names
-    data['feature5'] = 0  # Add the missing feature with a default value of 0
+
+    # Add the missing feature with a default value of 0
+    if 'feature5' not in data.columns:
+        data['feature5'] = 0
+
     X = data[features + ['feature5']]  # Now 'feature5' exists in the DataFrame
     y = data[target_column]
 

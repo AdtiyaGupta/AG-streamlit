@@ -49,7 +49,7 @@ if uploaded_file:
     st.write(f"Data shape: {data.shape}")
 
     # Define the model file path
-    model_file_path = "linear_reg_model.pkl"
+    model_file_path = "linear_reg_model(1).pkl"
 
     # Train and save the model if it doesn't exist
     if not os.path.exists(model_file_path):

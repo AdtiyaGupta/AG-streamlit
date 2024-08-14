@@ -79,25 +79,29 @@ if uploaded_file:
     # Train and save the model if it doesn't exist
     if not os.path.exists(model_file_path):
         # Handle missing values
-        numeric_features = X.select_dtypes(include=['int64', 'float64']).columns
-        numeric_transformer = Pipeline(steps=[
-            ('imputer', SimpleImputer(strategy='median')),
-        ])
+        numeric_features = [col for col in X.columns if X[col].dtype.kind in 'bifc']
 
-        preprocessor = ColumnTransformer(
-            transformers=[
-                ('num', numeric_transformer, numeric_features),
-            ]
-        )
+        if not numeric_features:
+            st.error("No numeric features found in the data. Please check your data and try again.")
+        else:
+            numeric_transformer = Pipeline(steps=[
+                ('imputer', SimpleImputer(strategy='median')),
+            ])
 
-        # Train a simple linear regression model
-        model = Pipeline(steps=[('preprocessor', preprocessor),
-                                ('regressor', LinearRegression())])
-        model.fit(X, y)
+            preprocessor = ColumnTransformer(
+                transformers=[
+                    ('num', numeric_transformer, numeric_features),
+                ]
+            )
 
-        # Save the model to a file
-        with open(model_file_path, 'wb') as handle:
-            pickle.dump(model, handle)
+            # Train a simple linear regression model
+            model = Pipeline(steps=[('preprocessor', preprocessor),
+                                    ('regressor', LinearRegression())])
+            model.fit(X, y)
+
+            # Save the model to a file
+            with open(model_file_path, 'wb') as handle:
+                pickle.dump(model, handle)
 
     # Load the pre-trained model
     with open(model_file_path, 'rb') as handle:

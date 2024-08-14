@@ -109,4 +109,11 @@ if uploaded_file:
     mse = mean_squared_error(y.values, y_pred)
 
     # Display the accuracy score (R-squared)
-   
+    st.write(f"R-squared: {r2:.2f}")
+
+    # Display the Mean Squared Error (MSE)
+    st.write(f"Mean Squared Error (MSE): {mse:.2f}")
+
+    # Display the predictions
+    st.write("Predictions:")
+    st.write(y_pred)

@@ -58,8 +58,10 @@ if uploaded_file:
     # Create a dropdown to select the target column
     target_column = st.selectbox("Select the target column", columns)
 
-    # Split the data into features (X) and target (y)
-    X = data.drop(target_column, axis=1)
+   # Select the correct features
+    features = ['feature1', 'feature2', 'feature3', 'feature4']  # Replace with the correct feature names
+    data['feature5'] = 0  # Add the missing feature with a default value of 0
+    X = data[features + ['feature5']]
     y = data[target_column]
 
     # Make predictions on the uploaded data

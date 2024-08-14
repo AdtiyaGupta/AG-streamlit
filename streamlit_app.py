@@ -71,8 +71,8 @@ if uploaded_file:
         st.error(f"Model expects {expected_n_features} features, but got {n_features}. Please check your data and model.")
     else:
         y_pred = model.predict(X_array)
-        # Get the true target values
-        y = df[target_column]  # Replace 'target_column' with the actual column name of your target variable
+        # Assuming that y is a pandas Series or a NumPy array
+        y = uploaded_file['target_column'].values  # Replace 'target_column' with the actual column name of your target variable
         # Calculate the accuracy score (R-squared)
         r2 = r2_score(y, y_pred)
         # Calculate the Mean Squared Error (MSE)

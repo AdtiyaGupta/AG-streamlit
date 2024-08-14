@@ -48,16 +48,24 @@ if uploaded_file:
     # Display the data dimensions
     st.write(f"Data shape: {data.shape}")
 
-    # Load the pre-trained model
-    model_file_path = os.path.join(os.getcwd(), 'linear_reg_model(1).pkl')
+    # Define the model file path
+    model_file_path = "linear_reg_model.pkl"
 
-    # Check if the model file exists
-    if os.path.exists(linear_reg_model(1).pkl):
-        with open(linear_reg_model(1).pkl, 'rb') as handle:
-            model = pickle.load(handle)
-    else:
-        st.error("Model file not found. Please ensure that 'linear_reg_model.pkl' is present in the current working directory.")
-        st.stop()
+    # Train and save the model if it doesn't exist
+    if not os.path.exists(model_file_path):
+        # Train a simple linear regression model
+        X = data.drop(data.columns[-1], axis=1)
+        y = data[data.columns[-1]]
+        model = LinearRegression()
+        model.fit(X, y)
+
+        # Save the model to a file
+        with open(model_file_path, 'wb') as handle:
+            pickle.dump(model, handle)
+
+    # Load the pre-trained model
+    with open(model_file_path, 'rb') as handle:
+        model = pickle.load(handle)
 
     # Get the column names
     columns = data.columns.tolist()

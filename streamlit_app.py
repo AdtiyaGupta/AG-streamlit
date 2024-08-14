@@ -58,28 +58,23 @@ if uploaded_file:
     # Create a dropdown to select the target column
     target_column = st.selectbox("Select the target column", columns)
 
-   # Select the correct features
+    # Select the correct features
     features = ['feature1', 'feature2', 'feature3', 'feature4']  # Replace with the correct feature names
     data['feature5'] = 0  # Add the missing feature with a default value of 0
-    X = data[features + ['feature5']]
+    X = data[features + ['feature5']]  # Now 'feature5' exists in the DataFrame
     y = data[target_column]
 
     # Make predictions on the uploaded data
     X_array = X.values  # Convert X to a NumPy array
-    n_features = X_array.shape[1]
-    expected_n_features = model.n_features_in_  # Get the number of features the model expects
-    if n_features != expected_n_features:
-        st.error(f"Model expects {expected_n_features} features, but got {n_features}. Please check your data and model.")
-    else:
-        y_pred = model.predict(X_array)
-        # Calculate the accuracy score (R-squared)
-        r2 = r2_score(y.values, y_pred)
-        # Calculate the Mean Squared Error (MSE)
-        mse = mean_squared_error(y.values, y_pred)
-        # Display the accuracy score (R-squared)
-        st.write(f"R-squared score: {r2:.3f}")
-        # Display the Mean Squared Error (MSE)
-        st.write(f"Mean Squared Error (MSE): {mse:.3f}")
+    y_pred = model.predict(X_array)
+    # Calculate the accuracy score (R-squared)
+    r2 = r2_score(y.values, y_pred)
+    # Calculate the Mean Squared Error (MSE)
+    mse = mean_squared_error(y.values, y_pred)
+    # Display the accuracy score (R-squared)
+    st.write(f"R-squared score: {r2:.3f}")
+    # Display the Mean Squared Error (MSE)
+    st.write(f"Mean Squared Error (MSE): {mse:.3f}")
 
     # Display the loaded model
     st.write(model)

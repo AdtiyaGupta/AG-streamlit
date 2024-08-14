@@ -49,7 +49,8 @@ if uploaded_file:
     st.write(f"Data shape: {data.shape}")
 
     # Load the pre-trained model
-    with open(r'linear_reg_model.pkl', 'rb') as handle:
+    model_file_path = os.path.join(os.getcwd(), 'linear_reg_model.pkl')
+    with open(model_file_path, 'rb') as handle:
         model = pickle.load(handle)
 
     # Get the column names

@@ -49,7 +49,7 @@ if uploaded_file:
     st.write(f"Data shape: {data.shape}")
 
     # Load the pre-trained model
-    with open(r'linear_reg_model (1).pkl', 'rb') as handle:
+    with open(r'linear_reg_model.pkl', 'rb') as handle:
         model = pickle.load(handle)
 
     # Get the column names
@@ -59,19 +59,27 @@ if uploaded_file:
     target_column = st.selectbox("Select the target column", columns)
 
     # Select the correct features
-    features = ['feature1', 'feature2', 'feature3', 'feature4']  # Replace with the correct feature names
+    features = [col for col in columns if col != target_column]
 
-    
+    # Define X as the feature columns
+    X = data[features]
+
+    # Define y as the target column
+    y = data[target_column]
 
     # Make predictions on the uploaded data
     X_array = X.values  # Convert X to a NumPy array
     y_pred = model.predict(X_array)
+
     # Calculate the accuracy score (R-squared)
     r2 = r2_score(y.values, y_pred)
+
     # Calculate the Mean Squared Error (MSE)
     mse = mean_squared_error(y.values, y_pred)
+
     # Display the accuracy score (R-squared)
     st.write(f"R-squared score: {r2:.3f}")
+
     # Display the Mean Squared Error (MSE)
     st.write(f"Mean Squared Error (MSE): {mse:.3f}")
 

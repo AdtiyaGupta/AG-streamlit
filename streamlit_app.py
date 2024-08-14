@@ -107,9 +107,12 @@ if uploaded_file:
     with open(model_file_path, 'rb') as handle:
         model = pickle.load(handle)
 
+    # ...
+
     # Make predictions on the uploaded data
     X_array = X.values  # Convert X to a NumPy array
-    y_pred = model.predict(X_array.reshape(-1, 1))  # Reshape X_array to 2D array
+    n_cols = X.shape[1]  # Get the number of columns in X
+    y_pred = model.predict(X_array.reshape(-1, n_cols))  # Reshape X_array to 2D array
     
     # Calculate the accuracy score (R-squared)
     r2 = r2_score(y, y_pred)

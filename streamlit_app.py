@@ -62,13 +62,23 @@ if uploaded_file:
     X = data.drop(target_column, axis=1)
     y = data[target_column]
 
-  # Make predictions on the uploaded data
+ 
+    # Make predictions on the uploaded data
     X_array = X.values  # Convert X to a NumPy array
     n_features = X_array.shape[1]
-    expected_n_features = 5  # Replace with the number of features your model expects
+    expected_n_features = model.n_features_in_  # Get the number of features the model expects
     if n_features != expected_n_features:
-        raise ValueError(f"Model expects {expected_n_features} features, but got {n_features}")
-    y_pred = model.predict(X_array)
+        st.error(f"Model expects {expected_n_features} features, but got {n_features}. Please check your data and model.")
+    else:
+        y_pred = model.predict(X_array)
+        # Calculate the accuracy score (R-squared)
+        r2 = r2_score(y, y_pred)
+        # Calculate the Mean Squared Error (MSE)
+        mse = mean_squared_error(y, y_pred)
+        # Display the accuracy score (R-squared)
+        st.write(f"R-squared score: {r2:.3f}")
+        # Display the Mean Squared Error (MSE)
+        st.write(f"Mean Squared Error (MSE): {mse:.3f}")
 
     # Calculate the accuracy score (R-squared)
     r2 = r2_score(y, y_pred)

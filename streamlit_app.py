@@ -107,21 +107,29 @@ if uploaded_file:
     with open(model_file_path, 'rb') as handle:
         model = pickle.load(handle)
 
-    # Make predictions on the uploaded data
-    y_pred = model.predict(X)  # Pass the original X to the predict function
+    # Get the column names expected by the ColumnTransformer
+    expected_columns = model.named_steps['preprocessor'].transformers_[0][2]
 
-    # Calculate the accuracy score (R-squared)
-    r2 = r2_score(y, y_pred)
-    
-    # Calculate the Mean Squared Error (MSE)
-    mse = mean_squared_error(y, y_pred)
-    
-    # Display the accuracy score (R-squared)
-    st.write(f"R-squared: {r2:.2f}")
-    
-    # Display the Mean Squared Error (MSE)
-    st.write(f"Mean Squared Error (MSE): {mse:.2f}")
-    
-    # Display the predictions
-    st.write("Predictions:")
-    st.write(y_pred)
+    # Check if all expected columns are present in X
+    if not all(col in X.columns for col in expected_columns):
+        missing_columns = [col for col in expected_columns if col not in X.columns]
+        st.error(f"Columns are missing: {missing_columns}. Please check your data and try again.")
+    else:
+        # Make predictions on the uploaded data
+        y_pred = model.predict(X)
+
+        # Calculate the accuracy score (R-squared)
+        r2 = r2_score(y, y_pred)
+        
+        # Calculate the Mean Squared Error (MSE)
+        mse = mean_squared_error(y, y_pred)
+        
+        # Display the accuracy score (R-squared)
+        st.write(f"R-squared: {r2:.2f}")
+        
+        # Display the Mean Squared Error (MSE)
+        st.write(f"Mean Squared Error (MSE): {mse:.2f}")
+        
+        # Display the predictions
+        st.write("Predictions:")
+        st.write(y_pred)

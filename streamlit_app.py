@@ -54,35 +54,6 @@ if uploaded_file:
     # Define the model file path
     model_file_path = "linear_reg_model(1).pkl"
 
-    # Train and save the model if it doesn't exist
-    if not os.path.exists(model_file_path):
-        # Handle missing values
-        numeric_features = data.select_dtypes(include=['int64', 'float64']).columns
-        numeric_transformer = Pipeline(steps=[
-            ('imputer', SimpleImputer(strategy='median')),
-        ])
-
-        preprocessor = ColumnTransformer(
-            transformers=[
-                ('num', numeric_transformer, numeric_features),
-            ]
-        )
-
-        # Train a simple linear regression model
-        X = data.drop(data.columns[-1], axis=1)
-        y = data[data.columns[-1]]
-        model = Pipeline(steps=[('preprocessor', preprocessor),
-                                ('regressor', LinearRegression())])
-        model.fit(X, y)
-
-        # Save the model to a file
-        with open(model_file_path, 'wb') as handle:
-            pickle.dump(model, handle)
-
-    # Load the pre-trained model
-    with open(model_file_path, 'rb') as handle:
-        model = pickle.load(handle)
-
     # Get the column names
     columns = data.columns.tolist()
 
@@ -97,6 +68,33 @@ if uploaded_file:
 
     # Define y as the target column
     y = data[target_column]
+
+    # Train and save the model if it doesn't exist
+    if not os.path.exists(model_file_path):
+        # Handle missing values
+        numeric_features = X.select_dtypes(include=['int64', 'float64']).columns
+        numeric_transformer = Pipeline(steps=[
+            ('imputer', SimpleImputer(strategy='median')),
+        ])
+
+        preprocessor = ColumnTransformer(
+            transformers=[
+                ('num', numeric_transformer, numeric_features),
+            ]
+        )
+
+        # Train a simple linear regression model
+        model = Pipeline(steps=[('preprocessor', preprocessor),
+                                ('regressor', LinearRegression())])
+        model.fit(X, y)
+
+        # Save the model to a file
+        with open(model_file_path, 'wb') as handle:
+            pickle.dump(model, handle)
+
+    # Load the pre-trained model
+    with open(model_file_path, 'rb') as handle:
+        model = pickle.load(handle)
 
     # Make predictions on the uploaded data
     X_array = X.values  # Convert X to a NumPy array

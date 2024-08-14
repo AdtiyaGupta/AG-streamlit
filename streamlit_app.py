@@ -49,7 +49,7 @@ if uploaded_file:
     st.write(f"Data shape: {data.shape}")
 
     # Load the pre-trained model
-    model_file_path = os.path.join(os.getcwd(), 'linear_reg_model.pkl')
+    model_file_path = os.path.join(os.getcwd(), 'linear_reg_model(1).pkl')
 
     # Check if the model file exists
     if os.path.exists(model_file_path):

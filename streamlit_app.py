@@ -8,6 +8,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import LabelEncoder
 
 # Set page config
 st.set_page_config(
@@ -69,6 +70,12 @@ if uploaded_file:
     # Define y as the target column
     y = data[target_column]
 
+    # Check if y is numeric
+    if y.dtype.kind not in 'bifc':
+        # Convert y to numeric using LabelEncoder
+        le = LabelEncoder()
+        y = le.fit_transform(y)
+
     # Train and save the model if it doesn't exist
     if not os.path.exists(model_file_path):
         # Handle missing values
@@ -101,10 +108,10 @@ if uploaded_file:
     y_pred = model.predict(X_array)
 
     # Calculate the accuracy score (R-squared)
-    r2 = r2_score(y.values, y_pred)
+    r2 = r2_score(y, y_pred)
 
     # Calculate the Mean Squared Error (MSE)
-    mse = mean_squared_error(y.values, y_pred)
+    mse = mean_squared_error(y, y_pred)
 
     # Display the accuracy score (R-squared)
     st.write(f"R-squared: {r2:.2f}")

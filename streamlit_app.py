@@ -5,6 +5,9 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics import r2_score, mean_squared_error
 from sklearn.linear_model import LinearRegression
+from sklearn.impute import SimpleImputer
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
 
 # Set page config
 st.set_page_config(
@@ -53,10 +56,23 @@ if uploaded_file:
 
     # Train and save the model if it doesn't exist
     if not os.path.exists(model_file_path):
+        # Handle missing values
+        numeric_features = data.select_dtypes(include=['int64', 'float64']).columns
+        numeric_transformer = Pipeline(steps=[
+            ('imputer', SimpleImputer(strategy='median')),
+        ])
+
+        preprocessor = ColumnTransformer(
+            transformers=[
+                ('num', numeric_transformer, numeric_features),
+            ]
+        )
+
         # Train a simple linear regression model
         X = data.drop(data.columns[-1], axis=1)
         y = data[data.columns[-1]]
-        model = LinearRegression()
+        model = Pipeline(steps=[('preprocessor', preprocessor),
+                                ('regressor', LinearRegression())])
         model.fit(X, y)
 
         # Save the model to a file
@@ -93,10 +109,4 @@ if uploaded_file:
     mse = mean_squared_error(y.values, y_pred)
 
     # Display the accuracy score (R-squared)
-    st.write(f"R-squared score: {r2:.3f}")
-
-    # Display the Mean Squared Error (MSE)
-    st.write(f"Mean Squared Error (MSE): {mse:.3f}")
-
-    # Display the loaded model
-    st.write(model)
+   

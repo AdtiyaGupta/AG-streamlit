@@ -109,20 +109,20 @@ if uploaded_file:
 
     # Make predictions on the uploaded data
     X_array = X.values  # Convert X to a NumPy array
-    y_pred = model.predict(X_array)
-
+    y_pred = model.predict(X_array.reshape(-1, 1))  # Reshape X_array to 2D array
+    
     # Calculate the accuracy score (R-squared)
     r2 = r2_score(y, y_pred)
-
+    
     # Calculate the Mean Squared Error (MSE)
     mse = mean_squared_error(y, y_pred)
-
+    
     # Display the accuracy score (R-squared)
     st.write(f"R-squared: {r2:.2f}")
-
+    
     # Display the Mean Squared Error (MSE)
     st.write(f"Mean Squared Error (MSE): {mse:.2f}")
-
+    
     # Display the predictions
     st.write("Predictions:")
     st.write(y_pred)

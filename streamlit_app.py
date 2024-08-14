@@ -50,8 +50,14 @@ if uploaded_file:
 
     # Load the pre-trained model
     model_file_path = os.path.join(os.getcwd(), 'linear_reg_model.pkl')
-    with open(model_file_path, 'rb') as handle:
-        model = pickle.load(handle)
+
+    # Check if the model file exists
+    if os.path.exists(model_file_path):
+        with open(model_file_path, 'rb') as handle:
+            model = pickle.load(handle)
+    else:
+        st.error("Model file not found. Please ensure that 'linear_reg_model.pkl' is present in the current working directory.")
+        st.stop()
 
     # Get the column names
     columns = data.columns.tolist()

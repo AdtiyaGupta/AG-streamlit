@@ -1,5 +1,5 @@
 import streamlit as st
-import streamlit-antd-components as sac
+import streamlit_antd_components as sac
 import os
 import pickle
 import pandas as pd

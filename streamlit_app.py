@@ -15,7 +15,7 @@ from sklearn.preprocessing import LabelEncoder
 st.set_page_config(
     page_title="ML model",
     page_icon=":rocket:",
-    layout="wide",
+    layout="normal",
 )
 
 #Menu Bar

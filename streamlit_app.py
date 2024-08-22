@@ -146,12 +146,18 @@ if uploaded_file:
         
         # Calculate the Mean Squared Error (MSE)
         mse = mean_squared_error(y, y_pred)
+
+        sac.divider(label='label', icon='house', align='center', color='gray')
         
         # Display the accuracy score (R-squared)
         st.write(f"R-squared: {r2:.2f}")
+
+        sac.divider(label='label', icon='house', align='center', color='gray')
         
         # Display the Mean Squared Error (MSE)
         st.write(f"Mean Squared Error (MSE): {mse:.2f}")
+
+        sac.divider(label='label', icon='house', align='center', color='gray')
         
         # Display the predictions
         st.write("Predictions:")

@@ -147,7 +147,7 @@ if uploaded_file:
         # Calculate the Mean Squared Error (MSE)
         mse = mean_squared_error(y, y_pred)
 
-        sac.divider(label='label', icon='house', align='center', color='gray')
+        sac.divider(label='Result', icon='result', align='center', color='gray')
         
         # Display the accuracy score (R-squared)
         st.write(f"R-squared: {r2:.2f}")

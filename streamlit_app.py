@@ -21,7 +21,7 @@ st.set_page_config(
 #Menu Bar
 with st.sidebar:
     sac.menu([
-        sac.MenuItem('home', icon='house-fill', tag=[sac.Tag('Tag1', color='green'), sac.Tag('Tag2', 'red')]),
+        sac.MenuItem('home', icon='house-fill'),
         sac.MenuItem('products', icon='box-fill', children=[
             sac.MenuItem('apple', icon='apple'),
             sac.MenuItem('other', icon='git', description='other items', children=[

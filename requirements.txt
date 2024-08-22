@@ -3,5 +3,3 @@ numpy
 pandas
 scikit-learn
 streamlit_antd_components
-pickle
-os

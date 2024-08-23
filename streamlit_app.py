@@ -193,40 +193,46 @@ if selected == 3:
     
         # Get the column names expected by the ColumnTransformer
         expected_columns = model.named_steps['preprocessor'].transformers_[0][2]
-    
+        
         # Get the actual columns in the data
         actual_columns = X.columns
-    
+        
         # Get the common columns between the expected columns and the actual columns
         common_columns = list(set(expected_columns) & set(actual_columns))
-    
+        
         # Check if all expected columns are present in X
         if not common_columns:
             st.error("No common columns found between the expected columns and the actual columns. Please check your data and try again.")
         else:
             # Use the common columns to make predictions
             X_common = X[common_columns]
-    
+        
             # Create a new ColumnTransformer with the common columns
             new_transformer = ColumnTransformer(
                 transformers=[
                     ('num', model.named_steps['preprocessor'].transformers_[0][1], common_columns),
                 ]
             )
-    
+        
+            # Fit the new ColumnTransformer to the data
+            new_transformer.fit(X_common)
+        
             # Create a new Pipeline with the new ColumnTransformer
             new_model = Pipeline(steps=[('preprocessor', new_transformer),
-                                        ('regressor', model.named_steps['regressor'])])
-    
+                                      ('regressor', model.named_steps['regressor'])])
+        
+            # Fit the new Pipeline to the data
+            new_model.fit(X_common, y)
+        
             # Make predictions with the new model
             y_pred = new_model.predict(X_common)
-    
+        
             # Calculate the accuracy score (R-squared)
             r2 = r2_score(y, y_pred)
-            
+        
             # Calculate the Mean Squared Error (MSE)
             mse = mean_squared_error(y, y_pred)
-    
+        
             st.divider(label='Result', icon='result', align='center', color='gray')
             
                         

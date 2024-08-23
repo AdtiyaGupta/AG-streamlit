@@ -20,7 +20,7 @@ st.set_page_config(
 
 #Menu Bar
 with st.sidebar:
-    selected = sac.menu([
+    menu_item = sac.menu([
         sac.MenuItem('home', icon='house-fill'),
         sac.MenuItem(type='divider'),
         sac.MenuItem('Feature', icon='box-fill', children=[
@@ -40,8 +40,7 @@ with st.sidebar:
     ], size='lg', variant='left-bar', color='grape', open_all=True, return_index=True)
 
 #Initializing selected to 0
-if selected is None:
-    selected = 0
+selected = menu_item
     
     # Data Ingestion tab
 if selected == 1:

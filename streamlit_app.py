@@ -20,7 +20,7 @@ st.set_page_config(
 
 #Menu Bar
 with st.sidebar:
-    sac.menu([
+    selected = sac.menu([
         sac.MenuItem('home', icon='house-fill'),
         sac.MenuItem(type='divider'),
         sac.MenuItem('Feature', icon='box-fill', children=[
@@ -41,6 +41,7 @@ with st.sidebar:
 
 
     # Data Ingestion tab
+if selected == 1:
     st.header("Data Ingestion")
     
     # Create a file uploader

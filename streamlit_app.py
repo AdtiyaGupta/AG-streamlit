@@ -120,6 +120,23 @@ if selected == 3:
             data = pd.read_csv(file_path)
         elif file_name.endswith('.xlsx'):
             data = pd.read_excel(file_path)
+
+        # Display the data dimensions
+        st.write(f"Data shape: {data.shape}")
+        
+        # Create a pie chart to represent the data distribution
+        st.subheader("Data Distribution")
+        pie_chart_data = data[target_column].value_counts()
+        fig, ax = plt.subplots()
+        ax.pie(pie_chart_data, labels=pie_chart_data.index, autopct='%1.1f%%')
+        ax.axis('equal')
+        st.pyplot(fig)
+    
+        # Get the column names
+        columns = data.columns.tolist()
+    
+        # Create a dropdown to select the target column
+        target_column = st.selectbox("Select the target column", columns)
     
         # Display the data dimensions
         st.write(f"Data shape: {data.shape}")

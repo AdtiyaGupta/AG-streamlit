@@ -159,7 +159,6 @@ if selected == 3:
         except ValueError as e:
             st.error(f"An error occurred while converting the target column to numeric: {e}")
     
-    
         # Train and save the model if it doesn't exist
         if not os.path.exists(model_file_path):
             # Handle missing values
@@ -169,7 +168,7 @@ if selected == 3:
                 st.error("No numeric features found in the data. Please check your data and try again.")
             else:
                 numeric_transformer = Pipeline(steps=[
-                    ('imputer', SimpleImputer(strategy='median')),
+                    ('imputer', SimpleImputer(strategy='mean')),
                 ])
     
                 preprocessor = ColumnTransformer(
@@ -195,13 +194,19 @@ if selected == 3:
         # Get the column names expected by the ColumnTransformer
         expected_columns = model.named_steps['preprocessor'].transformers_[0][2]
     
+        # Get the actual columns in the data
+        actual_columns = X.columns
+    
+        # Get the common columns between the expected columns and the actual columns
+        common_columns = list(set(expected_columns) & set(actual_columns))
+    
         # Check if all expected columns are present in X
-        if not all(col in X.columns for col in expected_columns):
-            missing_columns = [col for col in expected_columns if col not in X.columns]
-            st.error(f"Columns are missing: {missing_columns}. Please check your data and try again.")
+        if not common_columns:
+            st.error("No common columns found between the expected columns and the actual columns. Please check your data and try again.")
         else:
-            # Make predictions on the uploaded data
-            y_pred = model.predict(X)
+            # Use the common columns to make predictions
+            X_common = X[common_columns]
+            y_pred = model.predict(X_common)
     
             # Calculate the accuracy score (R-squared)
             r2 = r2_score(y, y_pred)
@@ -209,19 +214,15 @@ if selected == 3:
             # Calculate the Mean Squared Error (MSE)
             mse = mean_squared_error(y, y_pred)
     
-            sac.divider(label='Result', icon='result', align='center', color='gray')
+            st.divider(label='Result', icon='result', align='center', color='gray')
             
             # Display the accuracy score (R-squared)
             st.subheader("R2 Score")
             st.write(f"R-squared: {r2:.2f}")
     
-            
-            
             # Display the Mean Squared Error (MSE)
             st.subheader("MSE Score")
             st.write(f"Mean Squared Error (MSE): {mse:.2f}")
-
-
 
             # Display the predictions
             st.subheader("Prediction Result")

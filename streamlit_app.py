@@ -43,7 +43,7 @@ if selected == 0:
     st.header("Hello")
     
 # Data Ingestion tab
-if selected == 1:
+if selected == 1,1:
     st.header("Data Ingestion")
     
     # Create a file uploader

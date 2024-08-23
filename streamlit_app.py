@@ -22,6 +22,7 @@ st.set_page_config(
 with st.sidebar:
     selected = sac.menu([
         sac.MenuItem('home', icon='house-fill'),
+        sac.MenuItem(type='divider'),
         sac.MenuItem('products', icon='box-fill', children=[
             sac.MenuItem('Data Ingestion'),           
             sac.MenuItem('Data Transformation', icon='', description=''),

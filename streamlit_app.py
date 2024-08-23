@@ -212,3 +212,66 @@ if selected == 3:
             # Display the predictions
             st.write("Predictions:")
             st.write(y_pred)
+# Freeze the Learning tab
+if selected == 6:
+    st.header("Freeze the Learning")
+    
+    # Load the uploaded data
+    data = pd.read_csv("uploads/" + uploaded_file.name)
+    
+    # Get the column names
+    columns = data.columns.tolist()
+    
+    # Create a dropdown to select the target column
+    target_column = st.selectbox("Select the target column", columns)
+    
+    # Select the correct features
+    features = [col for col in columns if col != target_column]
+    
+    # Define X as the feature columns
+    X = data[features]
+    
+    # Define y as the target column
+    y = data[target_column]
+    
+    # Check if y is numeric
+    if y.dtype.kind not in 'bifc':
+        # Convert y to numeric using LabelEncoder
+        le = LabelEncoder()
+        y = le.fit_transform(y)
+    
+    # Create a dropdown to select the algorithm
+    algorithm = st.selectbox("Select the algorithm", ["Linear Regression", "Decision Tree", "Ada Boost", "XG Boost"])
+    
+    # Train and evaluate the model
+    if algorithm == "Linear Regression":
+        model = LinearRegression()
+    elif algorithm == "Decision Tree":
+        model = DecisionTreeRegressor()
+    elif algorithm == "Ada Boost":
+        model = AdaBoostRegressor()
+    elif algorithm == "XG Boost":
+        model = xgb.XGBRegressor()
+    
+    model.fit(X, y)
+    
+    # Make predictions on the uploaded data
+    y_pred = model.predict(X)
+    
+    # Calculate the accuracy score (R-squared)
+    r2 = r2_score(y, y_pred)
+    
+    # Calculate the Mean Squared Error (MSE)
+    mse = mean_squared_error(y, y_pred)
+    
+    sac.divider(label='Result', icon='result', align='center', color='gray')
+    
+    # Display the accuracy score (R-squared)
+    st.write(f"R-squared: {r2:.2f}")
+    
+    # Display the Mean Squared Error (MSE)
+    st.write(f"Mean Squared Error (MSE): {mse:.2f}")
+    
+    # Display the predictions
+    st.write("Predictions:")
+    st.write(y_pred)

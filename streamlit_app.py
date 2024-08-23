@@ -27,7 +27,7 @@ with st.sidebar:
             sac.MenuItem('Data Transformation', icon='', description=''),
             sac.MenuItem('Auto Train ML Model', icon=''),
             sac.MenuItem('Freeze the Learning', icon=''),
-        )],
+        ]),
         sac.MenuItem('disabled', disabled=True),
         sac.MenuItem(type='divider'),
         sac.MenuItem('link', type='group', children=[

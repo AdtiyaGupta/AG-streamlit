@@ -154,7 +154,7 @@ if selected == 3:
         # Define y as the target column
         y = data[target_column]
     
-       try:
+        try:
             y = pd.to_numeric(y, errors='coerce')
         except ValueError as e:
             st.error(f"An error occurred while converting the target column to numeric: {e}")

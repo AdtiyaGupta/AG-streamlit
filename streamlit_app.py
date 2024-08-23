@@ -40,8 +40,7 @@ with st.sidebar:
     ], size='lg', variant='left-bar', color='grape', open_all=True, return_index=True)
 
 #Initializing selected to 0
-if selected is None:
-    selected = 0
+selected = selected if selected is not None else 0
     
     # Data Ingestion tab
 if selected == 1:

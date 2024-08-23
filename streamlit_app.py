@@ -23,12 +23,11 @@ with st.sidebar:
     selected = sac.menu([
         sac.MenuItem('home', icon='house-fill'),
         sac.MenuItem(type='divider'),
-        sac.MenuItem('Feature', icon='box-fill', children=[
-            sac.MenuItem('Data Ingestion'),           
-            sac.MenuItem('Data Transformation', icon='', description=''),
-            sac.MenuItem('Auto Train ML Model', icon=''),
-            sac.MenuItem('Freeze the Learning', icon=''),
-        ]),
+        sac.MenuItem('Data Ingestion'),           
+        sac.MenuItem('Data Transformation', icon='', description=''),
+        sac.MenuItem('Auto Train ML Model', icon=''),
+        sac.MenuItem('Freeze the Learning', icon=''),
+  
         sac.MenuItem('disabled', disabled=True),
         sac.MenuItem(type='divider'),
         sac.MenuItem('link', type='group', children=[
@@ -43,7 +42,7 @@ if selected == 0:
     st.header("Hello")
     
 # Data Ingestion tab
-if selected == 1,1:
+if selected == 1:
     st.header("Data Ingestion")
     
     # Create a file uploader

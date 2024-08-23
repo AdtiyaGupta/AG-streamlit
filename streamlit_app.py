@@ -174,6 +174,26 @@ if selected == 3:
                 # Save the model to a file
                 with open(model_file_path, 'wb') as handle:
                     pickle.dump(model, handle)
+
+
+
+        # Create a pie chart
+        st.header("Pie Chart of the Data")
+        
+        # Get the column names
+        columns = data.columns.tolist()
+        
+        # Create a dropdown to select the column for the pie chart
+        pie_column = st.selectbox("Select the column for the pie chart", columns)
+        
+        # Create a pie chart
+        pie_chart_data = data[pie_column].value_counts().to_dict()
+        
+        st.write(pie_chart_data)
+        
+        nivo.pie(pie_chart_data, height=400, width=800)
+
+        
     
         # Load the pre-trained model
         with open(model_file_path, 'rb') as handle:

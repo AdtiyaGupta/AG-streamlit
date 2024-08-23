@@ -105,6 +105,9 @@ if selected == 3:
     uploaded_file = st.file_uploader("Choose a file", type=["csv", "xlsx"], accept_multiple_files=False)
     
     if uploaded_file:
+        # Store the uploaded file in the session state
+        st.session_state.uploaded_file = uploaded_file
+        
         # Create the uploads directory if it doesn't exist
         uploads_dir = "uploads"
         if not os.path.exists(uploads_dir):

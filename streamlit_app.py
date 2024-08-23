@@ -217,7 +217,14 @@ if selected == 3:
 if selected == 6:
     st.header("Freeze the Learning")
 
-    
+    if uploaded_file is None:
+        st.error("Please upload a file in the Data Ingestion section")
+    else:
+        # Load the uploaded data
+        if uploaded_file.name.endswith('.csv'):
+            data = pd.read_csv(uploaded_file)
+        elif uploaded_file.name.endswith('.xlsx'):
+            data = pd.read_excel(uploaded_file
     
     # Load the uploaded data
     data = pd.read_csv("uploads/" + uploaded_file.name)

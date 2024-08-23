@@ -10,6 +10,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import LabelEncoder
+import matplotlib.pyplot as plt
 
 
 # Set page config
@@ -124,19 +125,20 @@ if selected == 3:
         # Display the data dimensions
         st.write(f"Data shape: {data.shape}")
         
+       # Get the column names
+        columns = data.columns.tolist()
+    
+        # Create a dropdown to select the target column
+        target_column = st.selectbox("Select the target column", columns)
+    
         # Create a pie chart to represent the data distribution
         st.subheader("Data Distribution")
+        import matplotlib.pyplot as plt
         pie_chart_data = data[target_column].value_counts()
         fig, ax = plt.subplots()
         ax.pie(pie_chart_data, labels=pie_chart_data.index, autopct='%1.1f%%')
         ax.axis('equal')
         st.pyplot(fig)
-    
-        # Get the column names
-        columns = data.columns.tolist()
-    
-        # Create a dropdown to select the target column
-        target_column = st.selectbox("Select the target column", columns)
     
         # Display the data dimensions
         st.write(f"Data shape: {data.shape}")

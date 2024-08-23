@@ -233,7 +233,7 @@ if selected == 3:
             # Calculate the Mean Squared Error (MSE)
             mse = mean_squared_error(y, y_pred)
         
-            st.divider(label='Result', icon='result', align='center', color='gray')
+            sac.divider(label='Result', icon='result', align='center', color='gray')
             
             st.markdown("<hr>", unsafe_allow_html=True)
             

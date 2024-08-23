@@ -224,7 +224,7 @@ if selected == 6:
         if uploaded_file.name.endswith('.csv'):
             data = pd.read_csv(uploaded_file)
         elif uploaded_file.name.endswith('.xlsx'):
-            data = pd.read_excel(uploaded_file
+            data = pd.read_excel(uploaded_file)
     
     # Load the uploaded data
     data = pd.read_csv("uploads/" + uploaded_file.name)

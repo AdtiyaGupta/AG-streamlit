@@ -24,12 +24,11 @@ with st.sidebar:
         sac.MenuItem('home', icon='house-fill'),
         sac.MenuItem(type='divider'),
         sac.MenuItem('Feature', icon='box-fill', children=[
-            sac.MenuItem('Data Ingestion'),
-            sac.MenuItem('other', icon='git', description='other feature', children=[
-                sac.MenuItem('Data Transformation', icon='', description='Feature description'),
-                sac.MenuItem('Auto Train ML Model', icon=''),
-                sac.MenuItem('Freeze the Learning', icon=''),
-            ]),
+            sac.MenuItem('Data Ingestion'),           
+            sac.MenuItem('Data Transformation', icon='', description=''),
+            sac.MenuItem('Auto Train ML Model', icon=''),
+            sac.MenuItem('Freeze the Learning', icon=''),
+            ),
         ]),
         sac.MenuItem('disabled', disabled=True),
         sac.MenuItem(type='divider'),

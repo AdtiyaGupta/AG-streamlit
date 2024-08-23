@@ -212,16 +212,19 @@ if selected == 3:
             sac.divider(label='Result', icon='result', align='center', color='gray')
             
             # Display the accuracy score (R-squared)
+            st.subheader("R2 Score")
             st.write(f"R-squared: {r2:.2f}")
     
             
             
             # Display the Mean Squared Error (MSE)
+            st.subheader("MSE Score")
             st.write(f"Mean Squared Error (MSE): {mse:.2f}")
 
 
 
             # Display the predictions
+            st.subheader("Prediction Result")
             st.write("Predictions:")
             st.write(y_pred)
 

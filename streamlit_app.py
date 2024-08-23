@@ -40,7 +40,7 @@ with st.sidebar:
     ], size='lg', variant='left-bar', color='grape', open_all=True, return_index=True)
 
     # Data Ingestion tab
-if tabs == 'Data Ingestion':
+if selected == 1:
 
     # Data Ingestion tab
     st.header("Data Ingestion")

@@ -20,6 +20,13 @@ st.set_page_config(
     layout="wide",
 )
 
+
+# Create a session state variable to store the uploaded file
+if 'uploaded_file' not in st.session_state:
+    st.session_state.uploaded_file = None
+
+
+
 #Menu Bar
 with st.sidebar:
     selected = sac.menu([

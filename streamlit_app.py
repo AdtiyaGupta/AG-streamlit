@@ -48,18 +48,7 @@ def load_data(file_path):
         data = pd.read_excel(file_path)
     return data
 
-# Function to train model
-def train_model(X, y, algorithm):
-    if algorithm == "Linear Regression":
-        model = LinearRegression()
-    elif algorithm == "Decision Tree":
-        model = DecisionTreeRegressor()
-    elif algorithm == "Ada Boost":
-        model = AdaBoostRegressor()
-    elif algorithm == "XG Boost":
-        model = xgb.XGBRegressor()
-    model.fit(X, y)
-    return model
+
 
 
 

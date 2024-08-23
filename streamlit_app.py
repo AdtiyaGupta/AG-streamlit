@@ -38,9 +38,12 @@ with st.sidebar:
     ], size='xl', variant='left-bar', color='grape', open_all=True, return_index=True)
 
 
-    # Data Ingestion tab
+    
 if selected == 0:
-
+    st.header("Hello")
+    
+# Data Ingestion tab
+if selected == 1:
     st.header("Data Ingestion")
     
     # Create a file uploader

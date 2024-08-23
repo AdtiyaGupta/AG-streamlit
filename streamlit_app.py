@@ -87,7 +87,7 @@ if selected == 0:
     for benefit in benefits:
         st.write(f"* {benefit}")
     
-uploaded_file = None
+
 
 # Data Ingestion tab
 if selected == 3:

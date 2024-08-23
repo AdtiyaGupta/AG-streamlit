@@ -206,7 +206,20 @@ if selected == 3:
         else:
             # Use the common columns to make predictions
             X_common = X[common_columns]
-            y_pred = model.predict(X_common)
+    
+            # Create a new ColumnTransformer with the common columns
+            new_transformer = ColumnTransformer(
+                transformers=[
+                    ('num', model.named_steps['preprocessor'].transformers_[0][1], common_columns),
+                ]
+            )
+    
+            # Create a new Pipeline with the new ColumnTransformer
+            new_model = Pipeline(steps=[('preprocessor', new_transformer),
+                                        ('regressor', model.named_steps['regressor'])])
+    
+            # Make predictions with the new model
+            y_pred = new_model.predict(X_common)
     
             # Calculate the accuracy score (R-squared)
             r2 = r2_score(y, y_pred)
@@ -216,6 +229,7 @@ if selected == 3:
     
             st.divider(label='Result', icon='result', align='center', color='gray')
             
+                        
             # Display the accuracy score (R-squared)
             st.subheader("R2 Score")
             st.write(f"R-squared: {r2:.2f}")

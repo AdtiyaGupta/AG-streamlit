@@ -94,7 +94,7 @@ if selected == 3:
     st.header("Data Ingestion")
     
     # Create a file uploader
-    uploaded_file = st.file_uploader("Choose a file", type=["csv", "xlsx"], accept_multiple_files=false)
+    uploaded_file = st.file_uploader("Choose a file", type=["csv", "xlsx"], accept_multiple_files=True)
     
     if uploaded_file:
         # Create the uploads directory if it doesn't exist

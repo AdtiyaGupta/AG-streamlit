@@ -39,6 +39,30 @@ with st.sidebar:
     ], size='lg', variant='left-bar', color='grape', open_all=True, return_index=True)
 
 
+
+# Function to load data
+def load_data(file_path):
+    if file_path.endswith('.csv'):
+        data = pd.read_csv(file_path)
+    elif file_path.endswith('.xlsx'):
+        data = pd.read_excel(file_path)
+    return data
+
+# Function to train model
+def train_model(X, y, algorithm):
+    if algorithm == "Linear Regression":
+        model = LinearRegression()
+    elif algorithm == "Decision Tree":
+        model = DecisionTreeRegressor()
+    elif algorithm == "Ada Boost":
+        model = AdaBoostRegressor()
+    elif algorithm == "XG Boost":
+        model = xgb.XGBRegressor()
+    model.fit(X, y)
+    return model
+
+
+
 #Home bar
 if selected == 0:
     st.header("Welcome to ML Model")

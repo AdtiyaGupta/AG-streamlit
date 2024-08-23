@@ -87,13 +87,14 @@ if selected == 0:
     for benefit in benefits:
         st.write(f"* {benefit}")
     
-    
+uploaded_file = None
+
 # Data Ingestion tab
 if selected == 3:
     st.header("Data Ingestion")
     
     # Create a file uploader
-    uploaded_file = st.file_uploader("Choose a file", type=["csv", "xlsx"], accept_multiple_files=False)
+    uploaded_file = st.file_uploader("Choose a file", type=["csv", "xlsx"], accept_multiple_files=true)
     
     if uploaded_file:
         # Create the uploads directory if it doesn't exist
@@ -215,6 +216,8 @@ if selected == 3:
 # Freeze the Learning tab
 if selected == 6:
     st.header("Freeze the Learning")
+
+    
     
     # Load the uploaded data
     data = pd.read_csv("uploads/" + uploaded_file.name)

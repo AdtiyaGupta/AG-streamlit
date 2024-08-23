@@ -225,10 +225,19 @@ if selected == 6:
             f.write(uploaded_file.getvalue())
         
         # Load the saved file
+        file_path = "uploads/" + uploaded_file.name
         if uploaded_file.name.endswith('.csv'):
-            data = pd.read_csv("uploads/" + uploaded_file.name)
+            @st.cache
+            def load_csv(file_path):
+                data = pd.read_csv(file_path)
+                return data
+            data = load_csv(file_path)
         elif uploaded_file.name.endswith('.xlsx'):
-            data = pd.read_excel("uploads/" + uploaded_file.name)
+            @st.cache
+            def load_excel(file_path):
+                data = pd.read_excel(file_path)
+                return data
+            data = load_excel(file_path)
     
     # Load the uploaded data
     data = pd.read_csv("uploads/" + uploaded_file.name)

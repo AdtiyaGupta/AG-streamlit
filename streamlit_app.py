@@ -87,14 +87,14 @@ if selected == 0:
     for benefit in benefits:
         st.write(f"* {benefit}")
     
-
+uploaded_file = None
 
 # Data Ingestion tab
 if selected == 3:
     st.header("Data Ingestion")
     
     # Create a file uploader
-    uploaded_file = st.file_uploader("Choose a file", type=["csv", "xlsx"], accept_multiple_files=True)
+    uploaded_file = st.file_uploader("Choose a file", type=["csv", "xlsx"], accept_multiple_files=False)
     
     if uploaded_file:
         # Create the uploads directory if it doesn't exist

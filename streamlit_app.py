@@ -224,76 +224,76 @@ if selected == 3:
             # Display the predictions
             st.write("Predictions:")
             st.write(y_pred)
+
+
+
+
 # Freeze the Learning tab
 if selected == 6:
     st.header("Freeze the Learning")
 
-    if uploaded_file is None:
+    if st.session_state.uploaded_file is None:
         st.error("Please upload a file in the Data Ingestion section")
     else:
         # Load the uploaded file
-        file_path = "uploads/" + uploaded_file.name
-        if uploaded_file.name.endswith('.csv'):
+        file_path = "uploads/" + st.session_state.uploaded_file.name
+        if st.session_state.uploaded_file.name.endswith('.csv'):
             data = pd.read_csv(file_path)
-        elif uploaded_file.name.endswith('.xlsx'):
+        elif st.session_state.uploaded_file.name.endswith('.xlsx'):
             data = pd.read_excel(file_path)
-    
-    # Load the uploaded data
-    data = pd.read_csv("uploads/" + uploaded_file.name)
-    
-    # Get the column names
-    columns = data.columns.tolist()
-    
-    # Create a dropdown to select the target column
-    target_column = st.selectbox("Select the target column", columns)
-    
-    # Select the correct features
-    features = [col for col in columns if col != target_column]
-    
-    # Define X as the feature columns
-    X = data[features]
-    
-    # Define y as the target column
-    y = data[target_column]
-    
-    # Check if y is numeric
-    if y.dtype.kind not in 'bifc':
-        # Convert y to numeric using LabelEncoder
-        le = LabelEncoder()
-        y = le.fit_transform(y)
-    
-    # Create a dropdown to select the algorithm
-    algorithm = st.selectbox("Select the algorithm", ["Linear Regression", "Decision Tree", "Ada Boost", "XG Boost"])
-    
-    # Train and evaluate the model
-    if algorithm == "Linear Regression":
-        model = LinearRegression()
-    elif algorithm == "Decision Tree":
-        model = DecisionTreeRegressor()
-    elif algorithm == "Ada Boost":
-        model = AdaBoostRegressor()
-    elif algorithm == "XG Boost":
-        model = xgb.XGBRegressor()
-    
-    model.fit(X, y)
-    
-    # Make predictions on the uploaded data
-    y_pred = model.predict(X)
-    
-    # Calculate the accuracy score (R-squared)
-    r2 = r2_score(y, y_pred)
-    
-    # Calculate the Mean Squared Error (MSE)
-    mse = mean_squared_error(y, y_pred)
-    
-    sac.divider(label='Result', icon='result', align='center', color='gray')
-    
-    # Display the accuracy score (R-squared)
-    st.write(f"R-squared: {r2:.2f}")
-    
-    # Display the Mean Squared Error (MSE)
-    st.write(f"Mean Squared Error (MSE): {mse:.2f}")
-    
-    # Display the predictions
-    st.write("Predictions:")
-    st.write(y_pred)
+
+        # Display the uploaded data
+        st.write("Uploaded Data:")
+        st.write(data)
+
+        # Get the target column
+        target_column = st.selectbox("Select the target column", data.columns)
+
+        # Create a pipeline for the model
+        numeric_features = data.select_dtypes(include=['int64', 'float64']).columns
+        categorical_features = data.select_dtypes(include=['object']).columns
+
+        numeric_transformer = Pipeline(steps=[
+            ('imputer', SimpleImputer(strategy='median')),
+        ])
+
+        categorical_transformer = Pipeline(steps=[
+            ('imputer', SimpleImputer(strategy='constant', fill_value='missing')),
+            ('le', LabelEncoder())
+        ])
+
+        preprocessor = ColumnTransformer(
+            transformers=[
+                ('num', numeric_transformer, numeric_features),
+                ('cat', categorical_transformer, categorical_features)
+            ]
+        )
+
+        # Define the models
+        models = {
+            "Linear Regression": LinearRegression(),
+            "Decision Tree": DecisionTreeRegressor(),
+            "AdaBoost": AdaBoostRegressor(),
+            "XGBoost": XGBRegressor()
+        }
+
+        # Train the models
+        X = data.drop(columns=[target_column])
+        y = data[target_column]
+        for model_name, model in models.items():
+            pipeline = Pipeline(steps=[('preprocessor', preprocessor),
+                                       ('model', model)])
+            pipeline.fit(X, y)
+
+            # Make predictions
+            predictions = pipeline.predict(X)
+
+            # Display the predictions
+            st.write(f"{model_name} Predictions:")
+            st.write(predictions)
+
+            # Evaluate the model
+            r2 = r2_score(y, predictions)
+            mse = mean_squared_error(y, predictions)
+            st.write(f"{model_name} R2 Score:", r2)
+            st.write(f"{model_name} Mean Squared Error:", mse)

@@ -22,7 +22,7 @@ st.set_page_config(
 with st.sidebar:
     selected = sac.menu([
         sac.MenuItem('home', icon='house-fill'),
-        sac.MenuItem(type='divider'),
+        
         sac.MenuItem('Data Ingestion'),           
         sac.MenuItem('Data Transformation', icon='', description=''),
         sac.MenuItem('Auto Train ML Model', icon=''),

@@ -154,11 +154,11 @@ if selected == 3:
         # Define y as the target column
         y = data[target_column]
     
-        # Check if y is numeric
-        if y.dtype.kind not in 'bifc':
-            # Convert y to numeric using LabelEncoder
-            le = LabelEncoder()
-            y = le.fit_transform(y)
+       try:
+            y = pd.to_numeric(y, errors='coerce')
+        except ValueError as e:
+            st.error(f"An error occurred while converting the target column to numeric: {e}")
+    
     
         # Train and save the model if it doesn't exist
         if not os.path.exists(model_file_path):

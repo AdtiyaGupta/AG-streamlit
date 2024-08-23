@@ -221,24 +221,12 @@ if selected == 6:
     if uploaded_file is None:
         st.error("Please upload a file in the Data Ingestion section")
     else:
-        # Save the uploaded file
-        with open("uploads/" + uploaded_file.name, "wb") as f:
-            f.write(uploaded_file.getvalue())
-        
-        # Load the saved file
+        # Load the uploaded file
         file_path = "uploads/" + uploaded_file.name
         if uploaded_file.name.endswith('.csv'):
-            @st.cache
-            def load_csv(file_path):
-                data = pd.read_csv(file_path)
-                return data
-            data = load_csv(file_path)
+            data = pd.read_csv(file_path)
         elif uploaded_file.name.endswith('.xlsx'):
-            @st.cache
-            def load_excel(file_path):
-                data = pd.read_excel(file_path)
-                return data
-            data = load_excel(file_path)
+            data = pd.read_excel(file_path)
     
     # Load the uploaded data
     data = pd.read_csv("uploads/" + uploaded_file.name)

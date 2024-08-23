@@ -135,8 +135,8 @@ if selected == 3:
         st.subheader("Data Distribution")
         import matplotlib.pyplot as plt
         pie_chart_data = data[target_column].value_counts()
-        fig, ax = plt.subplots()
-        ax.pie(pie_chart_data, labels=pie_chart_data.index, autopct='%1.1f%%')
+        fig, ax = plt.subplots(figsize=(4, 4))
+        ax.pie(pie_chart_data, labels=pie_chart_data.index, autopct='%1.1f%%', startangle=90)
         ax.axis('equal')
         st.pyplot(fig)
     

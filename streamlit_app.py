@@ -1,3 +1,4 @@
+
 import streamlit as st
 import streamlit_antd_components as sac
 import os
@@ -37,19 +38,6 @@ with st.sidebar:
             sac.MenuItem('@2', icon='', href=''),
         ]),
     ], size='lg', variant='left-bar', color='grape', open_all=True, return_index=True)
-
-
-
-# Function to load data
-def load_data(file_path):
-    if file_path.endswith('.csv'):
-        data = pd.read_csv(file_path)
-    elif file_path.endswith('.xlsx'):
-        data = pd.read_excel(file_path)
-    return data
-
-
-
 
 
 #Home bar
@@ -233,53 +221,81 @@ if selected == 6:
     if uploaded_file is None:
         st.error("Please upload a file in the Data Ingestion section")
     else:
-        # Load the uploaded data
-        data = load_data("uploads/" + uploaded_file.name)
+        # Save the uploaded file
+        with open("uploads/" + uploaded_file.name, "wb") as f:
+            f.write(uploaded_file.getvalue())
+        
+        # Load the saved file
+        file_path = "uploads/" + uploaded_file.name
+        if uploaded_file.name.endswith('.csv'):
+            @st.cache
+            def load_csv(file_path):
+                data = pd.read_csv(file_path)
+                return data
+            data = load_csv(file_path)
+        elif uploaded_file.name.endswith('.xlsx'):
+            @st.cache
+            def load_excel(file_path):
+                data = pd.read_excel(file_path)
+                return data
+            data = load_excel(file_path)
     
-        # Get the column names
-        columns = data.columns.tolist()
+    # Load the uploaded data
+    data = pd.read_csv("uploads/" + uploaded_file.name)
     
-        # Create a dropdown to select the target column
-        target_column = st.selectbox("Select the target column", columns)
+    # Get the column names
+    columns = data.columns.tolist()
     
-        # Select the correct features
-        features = [col for col in columns if col != target_column]
+    # Create a dropdown to select the target column
+    target_column = st.selectbox("Select the target column", columns)
     
-        # Define X as the feature columns
-        X = data[features]
+    # Select the correct features
+    features = [col for col in columns if col != target_column]
     
-        # Define y as the target column
-        y = data[target_column]
+    # Define X as the feature columns
+    X = data[features]
     
-        # Check if y is numeric
-        if y.dtype.kind not in 'bifc':
-            # Convert y to numeric using LabelEncoder
-            le = LabelEncoder()
-            y = le.fit_transform(y)
+    # Define y as the target column
+    y = data[target_column]
     
-        # Create a dropdown to select the algorithm
-        algorithm = st.selectbox("Select the algorithm", ["Linear Regression", "Decision Tree", "Ada Boost", "XG Boost"])
+    # Check if y is numeric
+    if y.dtype.kind not in 'bifc':
+        # Convert y to numeric using LabelEncoder
+        le = LabelEncoder()
+        y = le.fit_transform(y)
     
-        # Train and evaluate the model
-        model = train_model(X, y, algorithm)
+    # Create a dropdown to select the algorithm
+    algorithm = st.selectbox("Select the algorithm", ["Linear Regression", "Decision Tree", "Ada Boost", "XG Boost"])
     
-        # Make predictions on the uploaded data
-        y_pred = model.predict(X)
+    # Train and evaluate the model
+    if algorithm == "Linear Regression":
+        model = LinearRegression()
+    elif algorithm == "Decision Tree":
+        model = DecisionTreeRegressor()
+    elif algorithm == "Ada Boost":
+        model = AdaBoostRegressor()
+    elif algorithm == "XG Boost":
+        model = xgb.XGBRegressor()
     
-        # Calculate the accuracy score (R-squared)
-        r2 = r2_score(y, y_pred)
+    model.fit(X, y)
     
-        # Calculate the Mean Squared Error (MSE)
-        mse = mean_squared_error(y, y_pred)
+    # Make predictions on the uploaded data
+    y_pred = model.predict(X)
     
-        sac.divider(label='Result', icon='result', align='center', color='gray')
+    # Calculate the accuracy score (R-squared)
+    r2 = r2_score(y, y_pred)
     
-        # Display the accuracy score (R-squared)
-        st.write(f"R-squared: {r2:.2f}")
+    # Calculate the Mean Squared Error (MSE)
+    mse = mean_squared_error(y, y_pred)
     
-        # Display the Mean Squared Error (MSE)
-        st.write(f"Mean Squared Error (MSE): {mse:.2f}")
+    sac.divider(label='Result', icon='result', align='center', color='gray')
     
-        # Display the predictions
-        st.write("Predictions:")
-        st.write(y_pred)
+    # Display the accuracy score (R-squared)
+    st.write(f"R-squared: {r2:.2f}")
+    
+    # Display the Mean Squared Error (MSE)
+    st.write(f"Mean Squared Error (MSE): {mse:.2f}")
+    
+    # Display the predictions
+    st.write("Predictions:")
+    st.write(y_pred)

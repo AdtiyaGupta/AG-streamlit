@@ -42,6 +42,8 @@ with st.sidebar:
 
     # Data Ingestion tab
 if selected == 1:
+    st.write("Home page")
+elif selected == 2:
     st.header("Data Ingestion")
     
     # Create a file uploader

@@ -22,12 +22,12 @@ st.set_page_config(
 with st.sidebar:
     selected = sac.menu([
         sac.MenuItem('home', icon='house-fill'),
-        
-        sac.MenuItem('Data Ingestion'),           
-        sac.MenuItem('Data Transformation', icon='', description=''),
-        sac.MenuItem('Auto Train ML Model', icon=''),
-        sac.MenuItem('Freeze the Learning', icon=''),
-  
+        sac.MenuItem('products', icon='box-fill', children=[
+            sac.MenuItem('Data Ingestion'),           
+            sac.MenuItem('Data Transformation', icon='', description=''),
+            sac.MenuItem('Auto Train ML Model', icon=''),
+            sac.MenuItem('Freeze the Learning', icon=''),
+        )],
         sac.MenuItem('disabled', disabled=True),
         sac.MenuItem(type='divider'),
         sac.MenuItem('link', type='group', children=[

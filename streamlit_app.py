@@ -235,7 +235,8 @@ if selected == 3:
         
             st.divider(label='Result', icon='result', align='center', color='gray')
             
-                        
+            st.markdown("<hr>", unsafe_allow_html=True)
+            
             # Display the accuracy score (R-squared)
             st.subheader("R2 Score")
             st.write(f"R-squared: {r2:.2f}")
